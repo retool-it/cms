@@ -1,6 +1,4 @@
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
 gettext = lambda s: s
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
 """
@@ -15,6 +13,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,18 +23,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1i(mcdr^pi0$jqt1rdcs0@o7k8!p04a)9-xyg7%az%d__4cv=%'
+SECRET_KEY = 'rtqoj*7=gbyhrg=l$&dx%znmi3%ulo&u!0v!i-_i+o#ei&-!qk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # allow all hosts IMPORTANT: Change for production
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 
+
+
+
 ROOT_URLCONF = 'app.urls'
+
 
 
 WSGI_APPLICATION = 'app.wsgi.application'
@@ -42,6 +46,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
+
 
 
 # Internationalization
@@ -75,7 +81,7 @@ SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'app', 'templates'), ],
+        'DIRS': [os.path.join(BASE_DIR, 'app', 'templates'),],
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
@@ -146,12 +152,12 @@ INSTALLED_APPS = (
 )
 
 LANGUAGES = (
-    # Customize this
+    ## Customize this
     ('en', gettext('en')),
 )
 
 CMS_LANGUAGES = {
-    # Customize this
+    ## Customize this
     1: [
         {
             'code': 'en',
@@ -169,7 +175,7 @@ CMS_LANGUAGES = {
 }
 
 CMS_TEMPLATES = (
-    # Customize this
+    ## Customize this
     ('page.html', 'Page'),
     ('feature.html', 'Page with Feature')
 )
@@ -191,7 +197,7 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
-
+    
 }
 
 THUMBNAIL_PROCESSORS = (
