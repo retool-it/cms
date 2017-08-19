@@ -21,6 +21,7 @@ ALLOWED_HOSTS=['localhost']
 POSTGRES_PASSWORD=changeme
 POSTGRES_DB=db_name
 POSTGRES_USER=db_username
+POSTGRES_PORT=5432
 ```
 
 Replace the placeholder values with desired/required info
@@ -36,4 +37,4 @@ Run the following command in the app service's container
 
 Follow the prompts to create a super user.
 
-Open your browser and navigate to http://(docker-machine ip):8000 and login with the username/password created in the previous step.
+Open your browser and navigate to <http://localhost:8000> and login with the username/password created in the previous step.
