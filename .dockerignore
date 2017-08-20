@@ -6,3 +6,4 @@ README.*
 __pycache__
 .venv/
 docker-compose.yml
+Dockerfile
