@@ -1,3 +1,9 @@
+---
+title: CMS
+author: Zachary Wilson
+date: 2017-08-20T00:00:00.000Z
+---
+
 # cms
 
 Content Management System based on Django CMS
@@ -8,8 +14,7 @@ Content Management System based on Django CMS
 - Postgres SQL Database
 - Docker!
 
-
-# Installation
+## Installation
 
 Create an `.env` file in the root of the project dir containing the following
 
@@ -28,12 +33,16 @@ Replace the placeholder values with desired/required info
 
 Start docker compose
 
-    docker-compose up -d
+```
+docker-compose up -d
+```
 
 Run the following command in the app service's container
 
-    docker-compose exec app python manage.py migrate
-    docker-compose exec python manage.py createsuperuser
+```
+docker-compose run app python manage.py migrate
+docker-compose exec python manage.py createsuperuser
+```
 
 Follow the prompts to create a super user.
 
@@ -41,9 +50,14 @@ Open your browser and navigate to <http://localhost:8000> and login with the use
 
 > ⚠️ Keep in mind that the database you create won't travel with your application image so don't do to much work on the front end that you don't want to lose.
 
-
-# Running as a service
+## Running as a service
 
 When you're ready to deploy your application run
 
-    docker stack deploy -c docker-cloud.yml cms
+```
+docker stack deploy -c docker-cloud.yml cms
+```
+
+## Todo
+
+- [ ] Verify stack configuration against [Django Deployment Checklist](https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/)
