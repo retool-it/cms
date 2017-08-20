@@ -1,0 +1,33 @@
+version: "3.3"
+
+services:
+  app:
+    build: .
+    image: retool/cms:development
+    env_file: .env
+    ports:
+      - "5000:8000" # check that host port is open in aws docker security group
+    depends_on:
+      - db
+    command: gunicorn -b :8000 app.wsgi:application
+  db:
+    image: postgres
+    env_file: .env
+    restart: always
+    volumes:
+      - type: volume
+        source: db_data
+        target: /var/lib/postgresql/data
+      # TODO: how do I bind mount this to a persistent volume?
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+  portainer:
+    image: portainer/portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+volumes:
+  db_data:
