@@ -1,8 +1,9 @@
 # PROJECT SPECIFIC
 project.db
-data/**
+data/
 config.ini
 *.env
+*.sql
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -2,7 +2,7 @@
 
 Content Management System based on Django CMS
 
-# Features
+## Features
 
 - Django CMS
 - Postgres SQL Database
@@ -44,4 +44,6 @@ Open your browser and navigate to <http://localhost:8000> and login with the use
 
 # Running as a service
 
-When you're ready to deploy your application
+When you're ready to deploy your application run
+
+    docker stack deploy -c docker-cloud.yml cms

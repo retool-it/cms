@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
   app:
-    build: .
     image: retool/cms:development
     env_file: .env
     ports:
@@ -13,7 +12,6 @@ services:
   db:
     image: postgres
     env_file: .env
-    restart: always
     volumes:
       - type: volume
         source: db_data
@@ -29,5 +27,9 @@ services:
       - 9000:9000
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - type: volume
+        source: portainer_data
+        target: /data
 volumes:
   db_data:
+  portainer_data:
