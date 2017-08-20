@@ -11,24 +11,26 @@ services:
     volumes:
       - type: bind
         source: ./app
-        target: /usr/src/app
+        target: /usr/src/app:cached
     command: gunicorn -b :8000 app.wsgi:application
     depends_on:
       - db
     deploy:
       restart_policy:
-        conditions: any
+        condition: on-failure
   db:
     image: postgres
     env_file: .env
     restart: always
     volumes:
-      - type: bind
-        source: ./data/db
+      - type: volume
+        source: db_data
         target: /var/lib/postgresql/data
     deploy:
       placement:
         constraints:
           - node.role == manager
       restart_policy:
-        conditions: any
+        condition: any
+volumes:
+  db_data:
