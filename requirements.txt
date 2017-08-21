@@ -1,3 +1,0 @@
-djangocms-installer
-psycopg2
-gunicorn
