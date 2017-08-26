@@ -43,12 +43,3 @@ $ docker stack deploy -c docker-compose.yml cms
 - Deploying a simple python app (Flask) w/ Gunicorn and NGINX
 
   <http://flask.pocoo.org/docs/0.12/deploying/wsgi-standalone/#proxy-setups>
-
-## TODO:
-
-- [ ] Add relevant references from browser history on August 25-26
-- [ ] Remove the line above when completed
-- [ ] ~~Overwrite current https://github.com/retool-solutions/cms repo with this version, e.g.~~
-        cp ~/Documents/GitHub/cms ~/Desktop/cms.bak
-        
-- [ ] Double check that script above before you run in HINT: it's wrong ;) #noseriously
