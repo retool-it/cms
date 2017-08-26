@@ -1,36 +1,33 @@
-version: "3.3"
+version:            '3.3'
 
 services:
-  app:
-    build: .
-    image: retool/cms:development
-    env_file: .env
-    restart: always
-    ports:
-      - "5000:8000"
-    volumes:
-      - type: bind
-        source: ./app
-        target: /usr/src/app:cached
-    command: gunicorn -b :8000 app.wsgi:application
-    depends_on:
-      - db
-    deploy:
-      restart_policy:
-        condition: on-failure
-  db:
-    image: postgres:alpine
-    env_file: .env
-    restart: always
-    volumes:
-      - type: volume
-        source: db_data
-        target: /var/lib/postgresql/data
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-      restart_policy:
-        condition: any
+    app:
+        image:      retool/cms:development
+        build:      ./app
+        env_file:   .env
+        restart:    always
+        depends_on:
+            - db
+        ports:
+            - 8000:8000
+        volumes:
+            - ./app:/usr/src/app
+    db:
+        image:      postgres:alpine
+        restart:    always
+        env_file:   .env
+        volumes:
+            - db_data:/var/lib/postgresql/data
+    web:
+        image:      retool/nginx:development
+        build:      ./web
+        restart:    always
+        depends_on:
+            - app
+        ports:
+            - 80:80
+        volumes:
+            - ./web/default.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./app/static:/usr/share/nginx/html:ro
 volumes:
-  db_data:
+    db_data:

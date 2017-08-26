@@ -1,76 +1,45 @@
 ---
-title: CMS
+title: cms
 author: Zachary Wilson
-date: 2017-08-20T00:00:00.000Z
+date: 2017-08-26T00:00:00.000Z
 ---
 
-# cms
+# CMS
 
-Content Management System based on Django CMS
+A lightweight, ready-to-deploy, containerized content management system and "production-ready" stack environment implementing recommended deployment best practices.
+
+## Install
+
+```
+git clone https://github.com/retool-solutions/cms
+```
 
 ## Features
 
-- Django CMS
-- Postgres SQL Database
-- Docker!
+Docker Containers!
 
-## Installation
+1. Gunicorn WSGI serving Django CMS
+2. Networked to PostgreSQL Database instance
+3. Proxied to port 80 by NGINX webserver
 
-Create an `.env` file in the root of the project dir containing the following
+## Usage
 
-```.ini
-# secret key can't be empty
-SECRET_KEY='secretkey'
-# use '*' for all hosts
-ALLOWED_HOSTS=['*']
-POSTGRES_PASSWORD=changeme
-POSTGRES_DB=db_name
-POSTGRES_USER=db_username
-POSTGRES_PORT=5432
-PYTHONHASHSEED=random
+Go from localhost to the host you love most with one command
+
+```bash
+$ docker stack deploy -c docker-compose.yml cms
 ```
 
-Replace the placeholder values with desired/required info
+## Reference
 
-Start docker compose
+- Minimal NGINX configuration for WSGI applications
 
-```
-docker-compose up -d
-```
+  <https://nginx.org/en/docs/beginners_guide.html>
 
-Run the following command in the app service's container
+- Using NGINX as a reverse proxy over tcp
 
-```
-docker-compose run app python manage.py migrate
-docker-compose exec python manage.py createsuperuser
-```
+  <http://portainer.readthedocs.io/en/stable/faq.html>
 
-Follow the prompts to create a super user.
+- Deploying a simple python app (Flask) w/ Gunicorn and NGINX
 
-Open your browser and navigate to <http://localhost:8000> and login with the username/password created in the previous step.
-
-> ⚠️ Keep in mind that the database you create won't travel with your application image so don't do to much work on the front end that you don't want to lose.
-
-## Running as a service
-
-When you're ready to deploy your application run
-
-```
-docker stack deploy -c docker-cloud.yml cms
-```
-
-## Todo
-
-- [ ] Verify stack configuration against [Django Deployment Checklist](https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/)
-    - [X] `SECRET_KEY` must be a large random value and it must be kept secret.
-    - [ ] You must never enable debug in production.
-    - [ ] If you use a wildcard, you must perform your own validation of the Host HTTP header, or otherwise ensure that you aren’t vulnerable to this category of attacks
-    - [X] Database passwords are very sensitive. You should protect them exactly like SECRET_KEY.
-    - [ ] To use different sender addresses, modify the `DEFAULT_FROM_EMAIL` and `SERVER_EMAIL` settings.
-    - [ ] In production, you must define a `STATIC_ROOT` directory where `collectstatic` will copy them.
-    - [ ] Make sure your web server never attempts to interpret \[media files\].
-    - [ ] Your web server must redirect all HTTP traffic to HTTPS, and only transmit HTTPS requests to Django.
-    - [X] Enabling persistent database connections can result in a nice speed-up when connecting to the database accounts for a significant part of the request processing time.
-    - [ ] Enabling the cached template loader often improves performance drastically, as it avoids compiling each template every time it needs to be rendered.
-    - [ ] Review your logging configuration before putting your website in production, and check that it works as expected as soon as you have received some traffic.
-    - [X] invoke the Python process running your Django application using the `-R` option or with the `PYTHONHASHSEED` environment variable set to random.
+  <http://flask.pocoo.org/docs/0.12/deploying/wsgi-standalone/#proxy-setups>
