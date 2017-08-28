@@ -2,7 +2,7 @@ version:              '3.3'
 
 services:
   app:
-    image:            retool/cms:development
+    image:            retool/cms
     build:            ./app
     env_file:         .env
     restart:          always
