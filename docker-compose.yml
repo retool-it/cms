@@ -44,3 +44,4 @@ configs:
     external:         true
 
 # TODO:               add adminer service for db management
+# TODO:               configure docker "secrets" for ssl certs  
