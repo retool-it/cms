@@ -1,0 +1,41 @@
+version:        '3.3'
+
+services:
+  db:
+    image:      postgres:alpine
+    restart:    always
+    env_file:   .env
+    volumes:
+      - ./data/db:/var/lib/postresql/data
+  cms:
+    image:      retool/cms
+    restart:    always
+    build:      .
+    env_file:   .env
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    volumes:
+      - static:/usr/src/app/static
+      - media:/usr/src/app/media
+  web:
+    image:      nginx:alpine
+    depends_on:
+      - cms
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - type:   bind
+        source: ./static
+        target: /usr/share/nginx/html
+      - type:   bind
+        source: ~/Development/Projects/retool.solutions/OPS/config/nginx/default.conf
+        target: /etc/nginx/conf.d/default.conf
+      - type:   bind
+        source: ~/Development/Projects/retool.solutions/OPS/config/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+volumes:
+  static:
+  media:

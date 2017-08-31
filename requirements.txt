@@ -12,10 +12,12 @@ djangocms-column>=1.6
 easy_thumbnails
 django-filer>=1.2
 cmsplugin-filer>=1.1
-Django<1.9
+Django<1.11
 pytz
 django-classy-tags>=0.7
 html5lib>=0.999999,<0.99999999
 Pillow>=3.0
 django-sekizai>=0.9
 six
+gunicorn
+psycopg2
