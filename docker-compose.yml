@@ -27,21 +27,21 @@ services:
     restart:          always
     depends_on:
       - app
-    configs:
-      - source:       default.conf
-        target:       /etc/nginx/conf.d/default.conf
     ports:
       - 80:80
     volumes:
       - type:         volume
         source:       static
         target:       /usr/share/nginx/html
+        read_only:    true
+        # TODO:       `config:` feauture not working w/ `docker-compose`?
+      - type:         bind
+        source:       ./config/nginx
+        target:       /etc/nginx/conf.d:ro
 volumes:
   db_data:
   static:
-configs:
-  default.conf:
-    external:         true
 
 # TODO:               add adminer service for db management
-# TODO:               configure docker "secrets" for ssl certs  
+# TODO:               configure docker "secrets" for ssl certs
+# TODO:               pick a volume mount syntax and stick with it
