@@ -1,0 +1,22 @@
+version:        '3.3'
+
+services:
+  db:
+    image:      postgres:alpine
+    restart:    always
+    env_file:   .env
+    volumes:
+      - ./data/db:/var/lib/postresql/data
+  cms:
+    image:      retool/cms
+    restart:    always
+    build:      .
+    env_file:   .env
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+  adminer:
+    image:      adminer
+    ports:
+      - 8080:8080
